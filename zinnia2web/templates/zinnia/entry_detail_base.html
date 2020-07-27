@@ -1,0 +1,1808 @@
+<!-- Perfil -->
+{% extends "zinnia/base.html" %}
+{% load i18n %}
+{% load zinnia %}
+{% load comments %}
+    {% load staticfiles %}
+    {% load static %}
+<!-- Etiquetas Meta-->
+{% block title %}{{ object.title }}{% endblock title %}
+{% block meta-description %}{{ object.excerpt|safe }}{% endblock meta-description %}
+{% block meta-keywords %}{% if object.tags %}{{ object.tags }}{% else %}{{ block.super }}{% endif %}{% endblock meta-keywords %}
+<!-- fin Etiquetas Meta-->
+
+
+
+
+{% block content %}
+        <header>
+            <nav  class="navbar  bg-color19 pb-2 d-sm-none d-sm-block ">
+            </nav>
+            <nav class="navbar bg-color15 navbar-expand-md top-bar navbar-static-top  sps--abv">
+                <div class="container">
+                    <a class="navbar-toggler header__toggle-menu   navbar-toggler-right" title="Menu" data-toggle="modal" data-target="#menuModal" ><link rel="stylesheet" type="text/css" href="http://code.ionicframework.com/ionicons/1.5.2/css/ionicons.min.css" /><i class=" ion-navicon"></i></a>
+                <a href="{% url 'index' %}"><img class="img-fluid-marca nav-bar-marca" src={% static 'index/img/divina-men2.svg' %}></a>
+                <nav class=" header__nav-wrap ">
+                <h2 class="header__nav-heading h6">NAVEGACIÓN</h2>
+                <ul class="header__nav">
+                    <li><a href="{% url 'index' %}" title="">PORTADA</a></li>
+                    <li class="current has-children">
+                        <a href="#0" title="">CIUDADES</a>
+                        <ul class="sub-menu">
+                            <li><a href="{% url 'index' %}">PUERTO MONTT</a></li>
+                            <li><a href="{% url 'index' %}">VALDIVIA</a></li>
+                            <li><a href="{% url 'index' %}">FUTRONO</a></li>
+                            <li><a href="{% url 'index' %}">RIO BUENO</a></li>
+                            <li><a href="{% url 'index' %}">OSORNO</a></li>
+                            <li><a href="{% url 'index' %}">PUCON</a></li>
+                            <li><a href="{% url 'index' %}">VILLARRICA</a></li>
+                            <li><a href="{% url 'index' %}">TEMUCO</a></li>
+                            <li><a href="{% url 'index' %}">LOS ANGELES</a></li>
+                            <li><a href="{% url 'index' %}">CHILLAN</a></li>
+                            <li><a href="{% url 'index' %}">CONCEPCION</a></li>
+                            <li><a href="{% url 'index' %}">TALCA</a></li>
+                            <li><a href="{% url 'index' %}">CURICO</a></li>
+                            <li><a href="{% url 'index' %}">RANCAGUA</a></li>
+                        </ul>
+                    </li>
+                    <li><a href='{% url 'contacto' %}' title="">CONTACTO</a></li>
+                </ul>
+                <a href=""><img class=" img-fluid-marca-nav header__nav-heading " src={% static 'index/img/divina-menu.svg' %}></a>
+                <a href="#0" title="Close Menu" class="header__overlay-close close-mobile-menu">Close</a>
+                </nav>
+                </div>
+            </nav>
+        </header>
+        <div class="container-fluid city-content-dos bg-color1">
+            <div class="row">
+                <div class="col-12">
+                    <h6 class="scort-text">Scort en</h6>
+                    <h6 class="city-text text-uppercase">{{ category }}{{ entry.get_ciudadheader_display }}</h6>
+
+                    <h6 class="text-uppercase perfil-categoriass">Categoria > {{ entry.categoriass }} </h6>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid bg-color1 ">
+
+            <div class="row justify-content-center ">
+                {% block entry-image2 %}
+                    {% if object.image2 %}
+                        <div class="elemento-padre ">
+                            <img class="elemento-hijo" src="{{ object.image2.url }}"/>
+                         </div>
+                    {% endif %}
+                {% endblock entry-image2 %}
+            </div>
+            <div class="row justify-content-center">
+                {% block entry-title %}
+                    {% if object.title %}
+                        <div class="">
+                            <h6 class="text-uppercase perfil-nombre">{{ entry.title }} </h6>
+
+                        <h6 class="perfil-edad"> </h6>
+                        </div>
+                    {% endif %}
+                {% endblock entry-title %}
+            </div>
+
+            <div class="row">
+
+                {% block entry-edad %}
+                    {% if object.edad %}
+                        <div class="col perfil-edad-box">
+                            <h6 class="perfil-edad">Edad:</h6>
+                            <h6 class="perfil-anos">{{ entry.edad }} años</h6>
+
+                        </div>
+                    {% endif %}
+                {% endblock entry-edad %}
+
+            </div>
+
+            <div class="row">
+                {% block entry-content %}
+                    {% if object.content %}
+                        <div class="col perfil-descrip-box">
+                            <h6 class="perfil-sobremi">Sobre mi</h6>
+                            <h6 class="perfil-descrip">{{ entry.content }}</h6>
+
+                        </div>
+                    {% endif %}
+                {% endblock entry-content %}
+
+            </div>
+            <div class="row">
+            <div class="col perfil-atributos-box">
+
+            {% block entry-nacionalidad %}
+                {% if object.nacionalidad %}
+                    <h6 class="text-uppercase perfil-atributos">{{ entry.nacionalidad }}</h6>
+                    <h6 class="text-uppercase perfil-atributos-separador"> | </h6>
+                {% endif %}
+            {% endblock entry-nacionalidad %}
+
+            {% block entry-tez %}
+                {% if object.tez %}
+                    <h6 class="text-uppercase perfil-atributos" >{{ entry.tez }}</h6>
+                    <h6 class="text-uppercase perfil-atributos-separador"> | </h6>
+                {% endif %}
+            {% endblock entry-tez %}
+
+            {% block entry-altura %}
+                {% if object.altura %}
+                    <h6 class="text-uppercase perfil-atributos" >{{ entry.altura }} CM</h6>
+                    <h6 class="text-uppercase perfil-atributos-separador"> | </h6>
+                {% endif %}
+            {% endblock entry-altura %}
+
+            {% block entry-peso %}
+                {% if object.peso %}
+                    <h6 class="text-uppercase perfil-atributos" >{{ entry.peso }} KG</h6>
+                    <h6 class="text-uppercase perfil-atributos-separador"> | </h6>
+                {% endif %}
+            {% endblock entry-peso %}
+
+            {% block entry-busto %}
+                {% if object.busto %}
+                    <h6 class="text-uppercase perfil-atributos" >{{ entry.busto }}-{{ entry.cintura }}-{{ entry.cadera }} XZY</h6>
+                    <h6 class="text-uppercase perfil-atributos-separador"> | </h6>
+                {% endif %}
+            {% endblock entry-busto %}
+
+                {% block entry-contextura %}
+                    {% if object.contextura %}
+                        <h6 class="text-uppercase perfil-atributos"> {{ entry.get_contextura_display }}</h6>
+                    {% endif %}
+            {% endblock entry-contextura %}
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class=" perfil-atributosdos-box ">
+                {% block entry-ojos %}
+                    {% if object.ojos %}
+                        <h6 class="perfil-atributosdos">Ojos {{ entry.get_ojos_display }}</h6>
+                    {% endif %}
+                {% endblock entry-ojos %}
+
+                {% block entry-cabello %}
+                    {% if object.nacionalidad %}
+                        <h6 class="perfil-atributosdos">Cabello {{ entry.get_cabello_display }}</h6>
+                    {% endif %}
+                {% endblock entry-cabello %}
+
+                {% block entry-busto2 %}
+                    {% if object.busto2 %}
+                        <h6 class="perfil-atributosdos">Busto {{ entry.get_busto2_display }}</h6>
+                    {% endif %}
+                {% endblock entry-busto2 %}
+
+                {% block entry-cola %}
+                    {% if object.cola %}
+                        <h6 class="perfil-atributosdos">Cola {{ entry.get_cola_display }}</h6>
+                    {% endif %}
+                {% endblock entry-cola %}
+
+                {% block entry-depilacion %}
+                    {% if object.depilacion %}
+                        <h6 class="perfil-atributosdos">{{ entry.get_depilacion_display }}</h6>
+                    {% endif %}
+                {% endblock entry-depilacion %}
+
+                {% block entry-idiomauno %}
+                    {% if object.idiomauno %}
+                        <h6 class="perfil-atributosdos">{{ entry.get_idiomauno_display }}</h6>
+                    {% endif %}
+                {% endblock entry-idiomauno %}
+
+                {% block entry-idiomados %}
+                    {% if object.idiomados %}
+                            <h6 class="perfil-atributosdos">{{ entry.get_idiomados_display }}</h6>
+                    {% endif %}
+                {% endblock entry-idiomados %}
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class=" bg-color4">
+        <div class="row perfil-telefono-box ">
+            <div class="col-12 pb-3">
+
+                {% block entry-concelular %}
+                    {% if object.concelular %}
+                        <a class="perfil-telefono-green pulse-button" href="tel:+56 {{ entry.concelular }} "><link rel="stylesheet" type="text/css" href="http://code.ionicframework.com/ionicons/1.5.2/css/ionicons.min.css" /><i class="  ion-ios7-telephone"></i></a>
+
+                    {% endif %}
+                {% endblock entry-concelular %}
+
+            </div>
+            <div class="col-12 ">
+
+                {% block entry-concelular2 %}
+                    {% if object.concelular %}
+                        <h6 class="perfil-precio-3">Teléfono:</h6>
+                        <a class="perfil-precio2" href="tel:+56 {{ entry.concelular }} ">+56 {{ entry.concelular }} </a>
+                         <h6 class="perfil-atiendo-content">utilizo whatsapp</h6>
+                    {% endif %}
+                {% endblock entry-concelular2 %}
+
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid bg-color1" >
+        <div class="row perfil-precio-box">
+            <div class="col-12 pt-3 pb-2 ">
+                <a class="perfil-precio-gold " href="#"><link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" /><i class="fa fa-camera" aria-hidden="true"></i></a>
+            </div>
+            <div class="col-12">
+                <h6 class="perfil-precio-3">Galería</h6>
+            </div>
+        </div>
+        <div class="tz-gallery container ">
+            <div class="row">
+
+                {% block entry-imagal1 %}
+                {% if object.imagal1 %}
+                    <div class="col-4 col-md-4 blackboxf ">
+                        <a class=" lightbox blackboxc " href="{{ object.imagal1.url }}"><img src="{{ object.imagal1.url }}" ></a>
+                    </div>
+                {% endif %}
+                {% endblock entry-imagal1 %}
+
+                {% block entry-imagal2 %}
+                {% if object.imagal2 %}
+                    <div class="col-4 col-md-4 blackboxf">
+                        <a class="lightbox blackboxc" href="{{ object.imagal2.url }}"><img src="{{ object.imagal2.url }}" ></a>
+                    </div>
+                {% endif %}
+                {% endblock entry-imagal2 %}
+
+                {% block entry-imagal3 %}
+                {% if object.imagal3 %}
+                    <div class="col-4 col-md-4 blackboxf">
+                        <a class="lightbox blackboxc" href="{{ object.imagal3.url }}"><img src="{{ object.imagal3.url }}" ></a>
+                    </div>
+                {% endif %}
+                {% endblock entry-imagal3 %}
+
+                {% block entry-imagal4 %}
+                {% if object.imagal4 %}
+                    <div class="col-4 col-md-4 blackboxf">
+                        <a class="lightbox blackboxc" href="{{ object.imagal4.url }}"><img src="{{ object.imagal4.url }}" ></a>
+                    </div>
+                {% endif %}
+                {% endblock entry-imagal4 %}
+
+                {% block entry-imagal5 %}
+                {% if object.imagal5 %}
+                    <div class="col-4 col-md-4 blackboxf">
+                        <a class="lightbox blackboxc" href="{{ object.imagal5.url }}"><img src="{{ object.imagal5.url }}" ></a>
+                    </div>
+                {% endif %}
+                {% endblock entry-imagal5 %}
+
+                {% block entry-imagal6 %}
+                {% if object.imagal6 %}
+                    <div class="col-4 col-md-4 blackboxf">
+                        <a class="lightbox blackboxc" href="{{ object.imagal6.url }}"><img src="{{ object.imagal6.url }}" ></a>
+                    </div>
+                {% endif %}
+                {% endblock entry-imagal6 %}
+
+                {% block entry-imagal7 %}
+                {% if object.imagal7 %}
+                    <div class="col-4 col-md-4 blackboxf">
+                        <a class="lightbox blackboxc" href="{{ object.imagal7.url }}"><img src="{{ object.imagal7.url }}" ></a>
+                    </div>
+                {% endif %}
+                {% endblock entry-imagal7 %}
+
+                {% block entry-imagal8 %}
+                {% if object.imagal8 %}
+                    <div class="col-4 col-md-4 blackboxf">
+                        <a class="lightbox blackboxc" href="{{ object.imagal8.url }}"><img src="{{ object.imagal8.url }}" ></a>
+                    </div>
+                {% endif %}
+                {% endblock entry-imagal8 %}
+
+                {% block entry-imagal9 %}
+                {% if object.imagal9 %}
+                    <div class="col-4 col-md-4 blackboxf">
+                        <a class="lightbox blackboxc" href="{{ object.imagal9.url }}">
+                            <img src="{{ object.imagal9.url }}">
+                        </a>
+                    </div>
+                {% endif %}
+                {% endblock entry-imagal9 %}
+
+                {% block entry-imagal10 %}
+                {% if object.imagal10 %}
+                    <div class="col-4 col-md-4 blackboxf">
+                        <a class="lightbox blackboxc" href="{{ object.imagal10.url }}"><img src="{{ object.imagal10.url }}"></a>
+                    </div>
+                {% endif %}
+                {% endblock entry-imagal10 %}
+
+                {% block entry-imagal11 %}
+                {% if object.imagal11 %}
+                    <div class="col-4 col-md-4 blackboxf">
+                        <a class="lightbox blackboxc" href="{{ object.imagal11.url }}"><img src="{{ object.imagal11.url }}"></a>
+                    </div>
+                {% endif %}
+                {% endblock entry-imagal11 %}
+
+                {% block entry-imagal12 %}
+                {% if object.imagal12 %}
+                    <div class="col-4 col-md-4 blackboxf">
+                        <a class="lightbox blackboxc" href="{{ object.imagal12.url }}"><img src="{{ object.imagal12.url }}"></a>
+                    </div>
+                {% endif %}
+                {% endblock entry-imagal12 %}
+
+                {% block entry-imagal13 %}
+                {% if object.imagal13 %}
+                    <div class="col-4 col-md-4 blackboxf">
+                        <a class="lightbox blackboxc" href="{{ object.imagal13.url }}"><img src="{{ object.imagal13.url }}"></a>
+                    </div>
+                {% endif %}
+                {% endblock entry-imagal13 %}
+
+                {% block entry-imagal14 %}
+                {% if object.imagal14 %}
+                    <div class="col-4 col-md-4 blackboxf">
+                        <a class="lightbox blackboxc" href="{{ object.imagal14.url }}"><img src="{{ object.imagal14.url }}"></a>
+                    </div>
+                {% endif %}
+                {% endblock entry-imagal14 %}
+
+                {% block entry-imagal15 %}
+                {% if object.imagal15 %}
+                    <div class="col-4 col-md-4 blackboxf">
+                        <a class="lightbox blackboxc" href="{{ object.imagal15.url }}"><img src="{{ object.imagal15.url }}"></a>
+                    </div>
+                {% endif %}
+                {% endblock entry-imagal15 %}
+
+                {% block entry-imagal16 %}
+                {% if object.imagal16 %}
+                    <div class="col-4 col-md-4 blackboxf">
+                        <a class="lightbox blackboxc" href="{{ object.imagal16.url }}"><img src="{{ object.imagal16.url }}"></a>
+                    </div>
+                {% endif %}
+                {% endblock entry-imagal16 %}
+
+                {% block entry-imagal17 %}
+                {% if object.imagal17 %}
+                    <div class="col-4 col-md-4 blackboxf">
+                        <a class="lightbox blackboxc" href="{{ object.imagal17.url }}"><img src="{{ object.imagal17.url }}"></a>
+                    </div>
+                {% endif %}
+                {% endblock entry-imagal17 %}
+
+                {% block entry-imagal18 %}
+                {% if object.imagal18 %}
+                    <div class="col-4 col-md-4 blackboxf">
+                        <a class="lightbox blackboxc" href="{{ object.imagal18.url }}"><img src="{{ object.imagal18.url }}"></a>
+                    </div>
+                {% endif %}
+                {% endblock entry-imagal18 %}
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+  
+
+
+ <link rel="stylesheet" href="{% static 'index/css/plyr.css' %}">
+
+
+<style>
+
+/*
+.plyr__controls {
+background: url(https://raw.githubusercontent.com/paulpopaul/zinnia2web/017b321da81b531563891798fd4c7faaa366864b/static/index/img/divina-men2.svg)  50% 0 no-repeat, linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, .6))!important;
+
+}
+
+*/
+
+.plyr {
+height: 100%;
+width :100%;
+}
+#wrapper{
+display: flex;
+justify-content:center;
+width: 900px;
+height: 500px;
+background-color: green;
+}
+.plyr__captions{
+height: 100%;
+}
+.plyr__video-wrapper iframe {
+width: 100%;
+height: 100%;
+
+}
+
+</style>
+{% load embed_video_tags %}
+    <div class="row perfil-precio-box">
+        <div class="col-12 pt-3 pb-2 ">
+            <a class="perfil-precio-gold " href="#"><link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" /><i class="fa fa-video-camera" aria-hidden="true"></i></a>
+        </div>
+        <div class="col-12 pb-4 ">
+            <h6 class="perfil-precio-3 ">Videos</h6>
+        </div>
+    </div>
+
+
+<div class="container">
+    <div class="row">
+        {% block entry-video_uno %}
+        {% if object.video_uno %}
+        <div class="col-lg-4 col-md-4 mb-4">
+            <video controls crossorigin playsinline poster=""  id="player1">
+            <!-- Video files -->
+
+            <source src="{{ MEDIA_URL }}{{ object.video_uno.url }}" type="video/mp4" size="720">
+
+            <!-- Caption files 
+            <track kind="captions" label="Español" srclang="es" src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.es.vtt"
+                default>
+            <track kind="captions" label="Ingles" srclang="in" src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.en.vtt">
+            -->
+            <!-- Fallback for browsers that don't support the <video> element 
+            <a href="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-576p.mp4" download>Download</a>-->
+            </video>
+        </div>
+        {% endif %}
+        {% endblock entry-video_uno %}
+
+        {% block entry-video_dos %}
+        {% if object.video_dos %}
+        <div class="col-lg-4 col-md-4 mb-4">
+            <video controls crossorigin playsinline poster=""  id="player2">
+            <!-- Video files -->
+            <source src="{{ MEDIA_URL }}{{ object.video_dos.url }}" type="video/mp4" size="720">
+            <!-- Caption files
+            <track kind="captions" label="Español" srclang="es" src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.es.vtt"
+                default>
+            <track kind="captions" label="Ingles" srclang="in" src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.en.vtt">
+            -->
+            <!-- Fallback for browsers that don't support the <video> element 
+            <a href="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-576p.mp4" download>Download</a>-->
+            </video>
+        </div>
+        {% endif %}
+        {% endblock entry-video_dos %}
+
+
+
+        {% block entry-video_tres %}
+        {% if object.video_tres %}
+        <div class="col-lg-4 col-md-4 mb-4">
+            <video controls  crossorigin webkit-playsinline playsinline poster=""  id="player3">
+            <!-- Video files -->
+            <source src="{{ MEDIA_URL }}{{ object.video_tres.url }}" type="video/mp4" >
+
+            <!-- Caption files 
+            <track kind="captions" label="Español" srclang="es" src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.es.vtt"
+                default>
+            <track kind="captions" label="Ingles" srclang="in" src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.en.vtt">
+                -->
+            <!-- Fallback for browsers that don't support the <video> element 
+            <a href="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-576p.mp4" download>Download</a>-->
+            </video>
+        </div>
+        {% endif %}
+        {% endblock entry-video_tres %}
+
+        {% block entry-video_cuatro %}
+        {% if object.video_cuatro %}
+        <div class="col-lg-4 col-md-4 mb-4">
+            <video controls crossorigin playsinline poster=""  id="player4">
+            <!-- Video files -->
+
+            <source src="{{ MEDIA_URL }}{{ object.video_cuatro.url }}" type="video/mp4" size="720">
+
+            <!-- Caption files 
+            <track kind="captions" label="Español" srclang="es" src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.es.vtt"
+                default>
+            <track kind="captions" label="Ingles" srclang="in" src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.en.vtt">
+                -->
+            <!-- Fallback for browsers that don't support the <video> element 
+            <a href="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-576p.mp4" download>Download</a>-->
+            </video>
+        </div>
+        {% endif %}
+        {% endblock entry-video_cuatro %}
+
+        {% block entry-video_cinco %}
+        {% if object.video_cinco %}
+        <div class="col-lg-4 col-md-4 mb-4">
+            <video controls crossorigin playsinline poster=""  id="player5">
+            <!-- Video files -->
+   
+            <source src="{{ MEDIA_URL }}{{ object.video_cinco.url }}" type="video/mp4" size="720">
+
+            <!-- Caption files 
+            <track kind="captions" label="Español" srclang="es" src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.es.vtt"
+                default>
+            <track kind="captions" label="Ingles" srclang="in" src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.en.vtt">
+                -->
+            <!-- Fallback for browsers that don't support the <video> element 
+            <a href="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-576p.mp4" download>Download</a>-->
+            </video>
+        </div>
+        {% endif %}
+        {% endblock entry-video_cinco %}
+
+        {% block entry-video_seis %}
+        {% if object.video_seis%}
+        <div class="col-lg-4 col-md-4 mb-4">
+            <video controls crossorigin playsinline poster=""  id="player6">
+            <!-- Video files -->
+
+            <source src="{{ MEDIA_URL }}{{ object.video_seis.url }}" type="video/mp4" size="720">
+
+            <!-- Caption files 
+            <track kind="captions" label="Español" srclang="es" src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.es.vtt"
+                default>
+            <track kind="captions" label="Ingles" srclang="in" src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.en.vtt">
+                -->
+            <!-- Fallback for browsers that don't support the <video> element 
+            <a href="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-576p.mp4" download>Download</a>-->
+            </video>
+        </div>
+        {% endif %}
+        {% endblock entry-video_seis %}
+     </div>
+</div>
+
+<script src="{% static 'index/js/plyr.js' %}"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => { 
+  // This is the bare minimum JavaScript. You can opt to pass no arguments to setup.
+  const player1 = new Plyr('#player1');
+  const player2 = new Plyr('#player2');
+  const player3 = new Plyr('#player3');
+  const player4 = new Plyr('#player4');
+  const player5 = new Plyr('#player5');
+  const player6 = new Plyr('#player6');
+  // Expose
+  window.player1 = player1;
+  window.player2 = player2;
+  window.player3 = player3;
+  window.player4 = player4;
+  window.player5 = player5;
+  window.player6 = player6;
+  // Bind event listener
+  function on(selector, type, callback) {
+    document.querySelector(selector).addEventListener(type, callback, false);
+  }
+
+  // Play
+  on('.js-play', 'click', () => { 
+    player1.play();
+
+  });
+
+  // Pause
+  on('.js-pause', 'click', () => { 
+    player.pause();
+  });
+
+  // Stop
+  on('.js-stop', 'click', () => { 
+    player.stop();
+  });
+
+  // Rewind
+  on('.js-rewind', 'click', () => { 
+    player.rewind();
+  });
+
+  // Forward
+  on('.js-forward', 'click', () => { 
+    player.forward();
+  });
+});
+</script>
+
+
+    <div class="container-fluid bg-color1">
+        <div class="row perfil-precio-box">
+
+            <div class="col-12 pt-3 pb-2 ">
+                {% block entry-convalor2 %}
+                    {% if object.convalor %}
+                        <a class="perfil-precio-gold " href="#"><link rel="stylesheet" type="text/css" href="http://code.ionicframework.com/ionicons/1.5.2/css/ionicons.min.css" /><i class="    ion-social-usd"></i></a>
+                    {% endif %}
+                {% endblock entry-convalor2 %}
+            </div>
+
+            <div class="col-12">
+                {% block entry-convalor %}
+                    {% if object.convalor %}
+                        <h6 class="perfil-precio-3">$ {{ entry.convalor }}</h6>
+                        <h6 class="perfil-servicio-content">por hora</h6>
+                    {% endif %}
+                {% endblock entry-convalor %}
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="container-fluid bg-color4">
+        <div class="row perfil-servicio-box">
+            <div class="col-12">
+
+                <h6 class="perfil-servicio-content">Algunos servicios podrían tener un costo adicional</h6>
+            </div>
+            <div class="col-6 verticalline">
+            {% block entry-atencion_pareja %}
+                  {% if object.atencion_pareja %}
+                    <div class="col ">
+                        <h6 class="perfil-servicio-tipo">{{ entry.get_atencion_pareja_display }}</h6>
+                    </div>
+                    {% endif %}
+            {% endblock entry-atencion_pareja %}
+
+            {% block entry-atencion_mujeres %}
+                {% if object.atencion_mujeres %}
+                    <div class="col ">
+                        <h6 class="perfil-servicio-tipo">{{ entry.get_atencion_mujeres_display }}</h6>
+                    </div>
+                {% endif %}
+            {% endblock entry-atencion_mujeres %}
+
+            {% block entry-atencion_discapaci %}
+                {% if object.atencion_discapaci %}
+                    <div class="col ">
+                        <h6 class="perfil-servicio-tipo">{{ entry.get_atencion_discapaci_display }}</h6>
+                    </div>
+                {% endif %}
+            {% endblock entry-atencion_discapaci %}
+
+            {% block entry-servicio_griego %}
+                {% if object.servicio_griego %}
+                    <div class="col ">
+                        <h6 class="perfil-servicio-tipo">{{ entry.get_servicio_griego_display }}</h6>
+                    </div>
+                {% endif %}
+            {% endblock entry-servicio_griego %}
+
+            {% block entry-frances_natural %}
+                {% if object.frances_natural %}
+                    <div class="col ">
+                        <h6 class="perfil-servicio-tipo">{{ entry.get_frances_natural_display }}</h6>
+                    </div>
+                {% endif %}
+            {% endblock entry-frances_natural %}
+
+            {% block entry-sexo_oral %}
+                {% if object.sexo_oral %}
+                    <div class="col ">
+                        <h6 class="perfil-servicio-tipo">{{ entry.get_sexo_oral_display }}</h6>
+                    </div>
+                {% endif %}
+            {% endblock entry-sexo_oral %}
+
+            {% block entry-lesbico %}
+                {% if object.lesbico %}
+                    <div class="col ">
+                        <h6 class="perfil-servicio-tipo">{{ entry.get_lesbico_display }}</h6>
+                    </div>
+                {% endif %}
+            {% endblock entry-lesbico %}
+
+                        {% block entry-besos_novia %}
+                {% if object.besos_novia %}
+                    <div class="col ">
+                        <h6 class="perfil-servicio-tipo">{{ entry.get_besos_novia_display }}</h6>
+                    </div>
+                {% endif %}
+            {% endblock entry-besos_novia %}
+
+            {% block entry-juguetes_eroticos %}
+                {% if object.juguetes_eroticos %}
+                    <div class="col ">
+                        <h6 class="perfil-servicio-tipo">{{ entry.get_juguetes_eroticos_display }}</h6>
+                    </div>
+                {% endif %}
+            {% endblock entry-juguetes_eroticos %}
+
+            {% block entry-cuadro_plastico %}
+                {% if object.cuadro_plastico %}
+                    <div class="col ">
+                        <h6 class="perfil-servicio-tipo">{{ entry.get_cuadro_plastico_display }}</h6>
+                    </div>
+                {% endif %}
+            {% endblock entry-cuadro_plastico %}
+
+            {% block entry-despedida_soltero %}
+                {% if object.despedida_soltero %}
+                    <div class="col ">
+                        <h6 class="perfil-servicio-tipo">{{ entry.get_despedida_soltero_display }}</h6>
+                    </div>
+                {% endif %}
+            {% endblock entry-despedida_soltero %}
+
+            {% block entry-viajess %}
+                {% if object.viajess %}
+                    <div class="col ">
+                        <h6 class="perfil-servicio-tipo">{{ entry.get_viajess_display }}</h6>
+                    </div>
+                {% endif %}
+            {% endblock entry-viajess %}
+
+            {% block entry-sadismo %}
+                {% if object.sadismo %}
+                    <div class="col ">
+                        <h6 class="perfil-servicio-tipo">{{ entry.get_sadismo_display }}</h6>
+                    </div>
+                {% endif %}
+            {% endblock entry-sadismo %}
+
+
+            {% block entry-servicio_adicional_uno %}
+                {% if object.servicio_adicional_uno %}
+                    <div class="col ">
+                        <h6 class="perfil-servicio-tipo">{{ entry.servicio_adicional_uno }}</h6>
+                    </div>
+                {% endif %}
+            {% endblock entry-servicio_adicional_uno %}
+
+            </div>
+            <div class="col-6 verticalline-two">
+
+            {% block entry-garganta_profunda %}
+                {% if object.garganta_profunda %}
+                    <div class="col ">
+                        <h6 class="perfil-servicio-tipo">{{ entry.get_garganta_profunda_display }}</h6>
+                    </div>
+                {% endif %}
+            {% endblock entry-garganta_profunda %}
+
+            {% block entry-duales_trios %}
+                {% if object.duales_trios %}
+                    <div class="col ">
+                        <h6 class="perfil-servicio-tipo">{{ entry.get_duales_trios_display }}</h6>
+                    </div>
+                {% endif %}
+            {% endblock entry-duales_trios %}
+
+
+            {% block entry-americanaa %}
+                {% if object.americanaa %}
+                    <div class="col ">
+                        <h6 class="perfil-servicio-tipo">{{ entry.get_americanaa_display }}</h6>
+                    </div>
+                {% endif %}
+            {% endblock entry-americanaa %}
+
+            {% block entry-americana_corporal %}
+                {% if object.americana_corporal %}
+                    <div class="col ">
+                        <h6 class="perfil-servicio-tipo">{{ entry.get_americana_corporal_display }}</h6>
+                    </div>
+                {% endif %}
+            {% endblock entry-americana_corporal %}
+
+            {% block entry-masajes %}
+                {% if object.masajes %}
+                    <div class="col ">
+                        <h6 class="perfil-servicio-tipo">{{ entry.get_masajes_display }}</h6>
+                    </div>
+                {% endif %}
+            {% endblock entry-masajes %}
+
+                    {% block entry-baile_erotico %}
+                {% if object.baile_erotico %}
+                    <div class="col ">
+                        <h6 class="perfil-servicio-tipo">{{ entry.get_baile_erotico_display }}</h6>
+                    </div>
+                {% endif %}
+            {% endblock entry-baile_erotico %}
+
+
+            {% block entry-servicio_adicional_dos %}
+                {% if object.servicio_adicional_dos %}
+                    <div class="col ">
+                        <h6 class="perfil-servicio-tipo">{{ entry.servicio_adicional_dos }}</h6>
+                    </div>
+                {% endif %}
+            {% endblock entry-servicio_adicional_dos %}
+
+            {% block entry-servicio_adicional_tres %}
+                {% if object.servicio_adicional_tres %}
+                    <div class="col ">
+                        <h6 class="perfil-servicio-tipo">{{ entry.servicio_adicional_tres }}</h6>
+                    </div>
+                {% endif %}
+            {% endblock entry-servicio_adicional_tres %}
+
+            {% block entry-servicio_adicional_cuatro %}
+                {% if object.servicio_adicional_cuatro %}
+                    <div class="col ">
+                        <h6 class="perfil-servicio-tipo">{{ entry.servicio_adicional_cuatro }}</h6>
+                    </div>
+                {% endif %}
+            {% endblock entry-servicio_adicional_cuatro %}
+
+
+            {% block entry-servicio_adicional_cinco %}
+                {% if object.servicio_adicional_cinco %}
+                    <div class="col ">
+                        <h6 class="perfil-servicio-tipo">{{ entry.servicio_adicional_cinco }}</h6>
+                    </div>
+                {% endif %}
+            {% endblock entry-servicio_adicional_cinco %}
+
+            {% block entry-servicio_adicional_seis %}
+                {% if object.servicio_adicional_seis %}
+                    <div class="col ">
+                        <h6 class="perfil-servicio-tipo">{{ entry.servicio_adicional_seis }}</h6>
+                    </div>
+                {% endif %}
+            {% endblock entry-servicio_adicional_seis %}
+
+            {% block entry-servicio_adicional_siete %}
+                {% if object.servicio_adicional_siete %}
+                    <div class="col ">
+                        <h6 class="perfil-servicio-tipo">{{ entry.servicio_adicional_siete }}</h6>
+                    </div>
+                {% endif %}
+            {% endblock entry-servicio_adicional_siete %}
+
+            {% block entry-servicio_adicional_ocho %}
+                {% if object.servicio_adicional_ocho %}
+                    <div class="col ">
+                        <h6 class="perfil-servicio-tipo">{{ entry.servicio_adicional_ocho }}</h6>
+                    </div>
+                {% endif %}
+            {% endblock entry-servicio_adicional_ocho %}
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="container-fluid bg-color4">
+        <div class="row perfil-precio-box">
+            <div class="col-12 pt-3 pb-2">
+                <a class="perfil-precio-gold " href="#"><link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" /><i class="fa fa-home" aria-hidden="true"></i></a>
+            </div>
+            <div class="col-12 ">
+                <h6 class="perfil-precio-3 ">Atención</h6>
+
+                <h6 class="perfil-atiendo-content">Flexible para mayor comodidad.</h6>
+            </div>
+            <div class="col ">
+                {% block entry-atiendeuno %}
+                    {% if object.atiendeuno %}
+                        <h6 class="perfil-atiendo ">{{ entry.get_atiendeuno_display }}  <link rel="stylesheet" type="text/css" href="http://code.ionicframework.com/ionicons/1.5.2/css/ionicons.min.css" /><i class="perfil-atiendo-green ion-checkmark"></i></h6>
+                    {% endif %}
+                {% endblock entry-atiendeuno %}
+
+                {% block entry-atiendedos %}
+                    {% if object.atiendedos %}
+                        <h6 class="perfil-atiendo">{{ entry.get_atiendedos_display }}  <link rel="stylesheet" type="text/css" href="http://code.ionicframework.com/ionicons/1.5.2/css/ionicons.min.css" /><i class="perfil-atiendo-green ion-checkmark"></i></h6>
+
+                    {% endif %}
+                {% endblock entry-atiendedos %}
+
+                {% block entry-atiendetres %}
+                    {% if object.atiendetres %}
+                        <h6 class="perfil-atiendo">{{ entry.get_atiendetres_display }}  <link rel="stylesheet" type="text/css" href="http://code.ionicframework.com/ionicons/1.5.2/css/ionicons.min.css" /><i class="perfil-atiendo-green ion-checkmark"></i></h6>
+
+                    {% endif %}
+                {% endblock entry-atiendetres %}
+
+                {% block entry-atiendecuatro %}
+                    {% if object.atiendecuatro %}
+                        <h6 class="perfil-atiendo">{{ entry.get_atiendecuatro_display }}  <link rel="stylesheet" type="text/css" href="http://code.ionicframework.com/ionicons/1.5.2/css/ionicons.min.css" /><i class="perfil-atiendo-green ion-checkmark"></i></h6>
+
+                    {% endif %}
+                {% endblock entry-atiendecuatro %}
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container-fluid bg-color1"></div>
+    <div class="row perfil-precio-box">
+        <div class="col-12 pt-3 pb-2">
+            <a class="perfil-precio-gold " href="#"><link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" /><i class="fa fa-clock-o" aria-hidden="true"></i></a>
+        </div>
+        <div class="col-12 ">
+            <h6 class="perfil-precio-3 ">Horario</h6>
+        </div>
+    </div>
+
+
+        <div class="row perfil-horario-box ">
+            <div class="col-12">
+                <h6 class="perfil-atiendo-content">Disponiblidad relativa, recuerda siempre confirmar.</h6>
+            </div>
+
+                {% block entry-dialunes %}
+                    {% if object.dialunes %}
+                         <div class="col ">
+                            <h6 class="perfil-horario-dia">Lun</h6>
+                            <h6 class="perfil-horario-atencion">{{ entry.get_dialunes_display }}</h6>
+                        </div>
+                    {% endif %}
+                {% endblock entry-dialunes %}
+
+
+                {% block entry-diamartes %}
+                    {% if object.diamartes %}
+                         <div class="col ">
+                            <h6 class="perfil-horario-dia">Mar</h6>
+                            <h6 class="perfil-horario-atencion">{{ entry.get_diamartes_display }}</h6>
+                         </div>
+                    {% endif %}
+                {% endblock entry-diamartes %}
+
+
+
+                {% block entry-diamiercoles %}
+                    {% if object.diamiercoles %}
+                    <div class="col">
+                        <h6 class="perfil-horario-dia">Mié</h6>
+                        <h6 class="perfil-horario-atencion">{{ entry.get_diamiercoles_display }}</h6>
+                    </div>
+                    {% endif %}
+                {% endblock entry-diamiercoles %}
+
+
+                {% block entry-diajueves %}
+                    {% if object.diajueves %}
+                        <div class="col ">
+                            <h6 class="perfil-horario-dia">Jue</h6>
+                            <h6 class="perfil-horario-atencion">{{ entry.get_diajueves_display }}</h6>
+                        </div>
+                    {% endif %}
+                {% endblock entry-diajueves %}
+
+
+
+                {% block entry-diaviernes %}
+                    {% if object.diaviernes %}
+                        <div class="col ">
+                            <h6 class="perfil-horario-dia">Vie</h6>
+                            <h6 class="perfil-horario-atencion">{{ entry.get_diaviernes_display }}</h6>
+                        </div>
+                    {% endif %}
+                {% endblock entry-diaviernes %}
+
+
+
+                {% block entry-diasabado %}
+                    {% if object.diasabado %}
+                    <div class="col ">
+                        <h6 class="perfil-horario-dia-dos">Sáb</h6>
+                        <h6 class="perfil-horario-atencion">{{ entry.get_diasabado_display }}</h6>
+                    </div>
+                    {% endif %}
+                {% endblock entry-diasabado %}
+
+
+
+                {% block entry-diadomingo %}
+                    {% if object.diadomingo %}
+                    <div class="col ">
+                        <h6 class="perfil-horario-dia-dos">Dom</h6>
+                        <h6 class="perfil-horario-atencion">{{ entry.get_diadomingo_display }}</h6>
+                    </div>
+                    {% endif %}
+                {% endblock entry-diadomingo %}
+        </div>
+    </div>
+
+
+        <div class="container-fluid bg-color1">
+        <div class="row perfil-precio-box">
+
+
+            <div class="col-12 pt-3 pb-2 ">
+                {% block entry-examenaldia2 %}
+                    {% if object.examenaldia %}
+                        <a class="examen-aldia-logo " href="#"><link rel="stylesheet" type="text/css" href="http://code.ionicframework.com/ionicons/1.5.2/css/ionicons.min.css" /><i class="    ion-heart"></i></a>
+                    {% endif %}
+                {% endblock entry-examenaldia2 %}
+            </div>
+
+            <div class="col-12">
+                {% block entry-examenaldia %}
+                    {% if object.examenaldia %}
+
+                        <h6 class="perfil-precio-3">Exámen Médico</h6>
+                        <h6 class="perfil-servicio-content">{{ entry.get_examenaldia_display }}</h6>
+                    {% endif %}
+                {% endblock entry-examenaldia %}
+            </div>
+        </div>
+    </div>
+
+
+<style>
+
+.stop::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      background: url("~@/assets/lucky-wheel/wheel-outside.svg") no-repeat;
+      background-position: center center;
+      background-size: contain;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+    }
+    .stop::before {
+      content: "";
+      display: block;
+      padding-top: 100%;
+      border-radius: 50%;
+    }
+
+.roulette {
+font-family: 'Raleway';
+display: block;
+position: relative;
+width: 400px;
+height: 400px;
+top: 50%;
+left: 50%;
+margin-top: 0;
+margin-left: -200px;
+border-radius: 50%;
+border:2px solid #ed265d;    
+-webkit-animation: glow 2s ease-in-out infinite alternate;
+  -moz-animation: glow 2s ease-in-out infinite alternate;
+  animation: glow 2s ease-in-out infinite alternate;
+box-shadow: 0 2px 33px rgba(255, 32, 98, 0.8);
+text-shadow: 0 0 10px #ed265d;
+}
+
+
+.roulette .shadow {
+display: block;
+position: absolute;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+border-radius: 50%;
+box-shadow: 0 0.3em 0 rgba(0, 0, 0, 0.25) inset;
+}
+
+.roulette .markers {
+display: block;
+position: absolute;
+top: -1px;
+left: -1px;
+right: -1px;
+bottom: -1px;
+overflow: hidden;
+border-radius: 100%;
+}
+.roulette .markers .marker {
+position: absolute;
+width: 0;
+height: 0;
+top: -200px;
+left: 200px;
+-webkit-transform-origin: 0% 400px;
+transform-origin: 0% 400px;
+border: 0 solid transparent;
+}
+.roulette .markers .triangle {
+width: 0;
+height: 0;
+border-style: solid;
+border-width: 1em 0 1em 1em;
+border-color: transparent transparent transparent #007bff;
+position: absolute;
+border-left-color: #fff;
+top: 50%;
+left: -1px;
+margin-top: -1em;
+-webkit-filter: drop-shadow(0 0.25em 0 rgba(0, 0, 0, 0.25));
+filter: drop-shadow(0 0.25em 0 rgba(0, 0, 0, 0.25));
+}
+.roulette .spinner {
+display: block;
+position: absolute;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+border-radius: 50%;
+overflow: hidden;
+-webkit-transform: rotateZ(0deg);
+transform: rotateZ(0deg);
+/*performance boost*/
+-webkit-backface-visibility: hidden;
+backface-visibility: hidden;
+}
+.roulette .spinner .item {
+position: absolute;
+width: 0;
+height: 0;
+top: -200px;
+left: 200px;
+-webkit-transform-origin: 0% 397px;
+transform-origin: 0% 397px;
+border: 0 solid transparent;
+}
+.roulette .spinner .item .label {
+display: block;
+position: absolute;
+color: #fff;
+font-weight: 800;
+top: 0;
+left: 0;
+white-space: nowrap;
+-webkit-transform-origin: 0 0;
+transform-origin: 0 0;
+font-size: 0.8em;
+}
+.roulette .spinner .item .label i,
+.roulette .spinner .item .label .text {
+display: inline-block;
+vertical-align: middle;
+line-height: 1;
+font-size: 11px;
+text-indent: 0;
+}
+.roulette .spinner .item .label i {
+margin-right: 0.1em;
+}
+.roulette .button {
+width: 8em;
+height: 8em;
+line-height: 8em;
+top: 54%;
+left: 54%;
+margin-left: -5em;
+margin-top: -5em;
+font-weight: 800;
+z-index: 998;
+position: absolute;
+background: #ed265d;
+border: none;
+border-radius: 100%;
+color: #ccc;
+outline: none;
+cursor: pointer;
+-webkit-user-select: none;
+-moz-user-select: none;
+-ms-user-select: none;
+user-select: none;
+box-shadow: 0 2px 20px rgba(255, 32, 98, 0.8);
+text-align: center;
+-webkit-transition: -webkit-transform 0.15s;
+transition: -webkit-transform 0.15s;
+transition: transform 0.15s;
+transition: transform 0.15s, -webkit-transform 0.15s;
+-webkit-transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+border: 2px solid #ccc;
+
+}
+.roulette .button:hover {
+color: 0;
+}
+.roulette .button span {
+    font-size: 14px;
+
+letter-spacing: -0.05em;
+}
+.roulette.busy .button {
+-webkit-transform: scale(0.9);
+transform: scale(0.9);
+box-shadow: 0 0.15em 0 rgba(0, 0, 0, 0.25);
+color: #999;
+cursor: default;
+}
+
+/* CUSTOM LABELS */
+.roulette .spinner .item[data-type="quiz"] .label {
+
+text-transform: uppercase;
+
+}
+.roulette .spinner .item[data-type="question"] .label {
+
+}
+.roulette .spinner .item[data-type="replay"] .label .text {
+white-space: initial;
+width: 1em;
+text-align: center;
+line-height: 1.2;
+text-shadow: 18 2px 15px rgba(255, 32, 98, 1);
+text-transform: uppercase;
+}
+.roulette .spinner .item[data-type="replay"] .label i {
+    font-size: 6px;
+}
+.roulette .spinner .item[data-type="time"] .label i {
+    font-size: 6px;
+}
+.container-super{
+background-color:#3A0D3F;
+padding:100px 0 100px;
+background-image: url('data:image/svg+xml,%3Csvg width="42" height="44" viewBox="0 0 42 44" xmlns="http://www.w3.org/2000/svg"%3E%3Cg id="Page-1" fill="none" fill-rule="evenodd"%3E%3Cg id="brick-wall" fill="%239C92AC" fill-opacity="0.1"%3E%3Cpath d="M0 0h42v44H0V0zm1 1h40v20H1V1zM0 23h20v20H0V23zm22 0h20v20H22V23z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');
+}
+
+.roulette .spinner .item .label i, .roulette .spinner .item .label .text {
+    font-size: 7px;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+
+@media screen and (max-width:375px) {
+.roulette {
+width: 300px;
+height: 300px;
+margin-top: 0;
+margin-left: -150px;
+border:2px solid #ed265d;    
+border-radius:50%;
+-moz-border-radius:50%;
+-webkit-border-radius:50%;
+box-shadow: 0 2px 33px rgba(255, 32, 98, 0.8);
+}
+
+.roulette .shadow {
+display: block;
+position: absolute;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+border-radius: 50%;
+box-shadow: 0 2.3em 0 rgba(0, 0, 0, 0.25) inset !important;
+}
+
+.roulette .markers .triangle {
+border-left-color: #ccc;
+margin-top: -1em;
+}
+
+.roulette .spinner .item {
+-webkit-transform-origin: 0% 300px;
+transform-origin: 0% 300px;
+border: 0 solid transparent;
+top: -151px;
+left: 149px;
+}
+
+.roulette .button {
+width: 5em;
+height: 5em;
+line-height: 5em;
+top: 63%;
+left: 63%;
+color:#ccc;
+background: #ed265d;
+border: 1px solid #ccc;
+box-shadow: 0 2px 20px rgba(255, 32, 98, 0.8);
+}
+
+.roulette .button span {
+font-size: 14px;
+letter-spacing: -0.05em;
+font-weight: 800;
+}
+
+.roulette .spinner .item .label {
+display: block;
+position: absolute;
+color: #ccc;
+font-weight: 800;
+top: 0;
+left: 0;
+white-space: nowrap;
+-webkit-transform-origin: 0 0;
+transform-origin: 0 0;
+font-size: 4px !important;
+text-shadow: 18 2px 15px rgba(255, 32, 98, 1);
+}
+
+.roulette .spinner .item .label i, .roulette .spinner .item .label .text {
+display: inline-block;
+vertical-align: middle;
+line-height: 1;
+text-indent: 2px;
+font-size: 6px;
+text-transform: uppercase;
+}
+.fichado{
+    border-top-color: green !important;
+}
+}
+
+</style>
+
+<script src="{% static 'index/js/jquery.min.js' %}"></script>
+<script src="{% static 'index/js/lodash.min.js' %}"></script>
+<script src="{% static 'index/js/backbone-min.js' %}"></script>
+<script src="{% static 'index/js/velocity.min.js' %}"></script>
+
+{% if entry.ruleta_estado == "mostrar" %}
+
+
+<div class="container-super ">
+
+    <h6 style="font-size: 60px;" class="scort-text mt-3  ">La Ruleta</h6>
+
+<div class="roulette">
+<div class="spinner"></div>
+<div class="shadow"></div>
+<div class="markers">
+<div class="triangle">
+
+</div>
+</div>
+<div class="button">
+<span><p>GIRAR</p></span>
+</div>
+</div>
+<style>
+
+.container-ruleta-etiqueta-box{
+width: 98%;
+margin-right:0px;
+    margin-left: 0px;
+
+}
+    
+.container-ruleta-etiqueta-box-detail{
+margin: 0 auto;
+max-width: 500px;
+padding-top: 60px;
+padding-bottom: 60px;
+
+}   
+
+.container-ruleta-etiqueta-box-box{
+margin: 3px auto;
+font-weight: 600;
+padding: 3px;
+max-width: 250px;
+border-radius: 50px;
+box-shadow: 0 2px 33px rgba(255, 32, 98, 0.3);
+border:1px solid #3A0D3F;
+}
+
+.container-ruleta-etiqueta-box-box:hover{
+border:1px solid #ed265d;
+
+}
+
+.ruleta-etiqueta-texto{
+color: #ccc;
+display: inline-block;
+font-size: 14px;
+width: 130px;
+text-align: center;
+margin: 0 6px;
+text-shadow: 18 2px 15px rgba(255, 32, 98, 1);
+
+}
+
+.ruleta-imagen{
+width: 80px;
+border-radius: 50%;
+box-shadow: 0 2px 20px rgba(255, 32, 98, 0.8);
+
+}
+
+.ruleta-imagen-right{
+justify-content: right;
+text-align: right;
+}
+
+
+.ruleta-imagen-background-1{
+    background:#792042;
+
+}
+.ruleta-imagen-background-2{
+    background:#3B0D3D;
+
+}
+.ruleta-imagen-background-3{
+    background:#220A37;
+}
+
+@media screen and (max-width:375px) {
+.container-ruleta-etiqueta-box{
+    width: 300px;
+
+
+}
+
+
+.ruleta-imagen{
+width: 70px;
+}
+
+.ruleta-etiqueta-texto{
+font-size: 14px;
+font-weight: 400;
+
+}
+
+
+}
+
+    </style>
+    
+
+
+    <div class="container-ruleta-etiqueta-box">
+        <div class="row">
+            <div class="col-12 container-ruleta-etiqueta-box-detail">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12 ">
+                        <div class=" ruleta-imagen-background-1 container-ruleta-etiqueta-box-box">
+                            <img class="ruleta-imagen" src={% static 'index/img/ruleta/EL_DELEITE.jpg' %}>
+                            <p class=" ruleta-etiqueta-texto">EL DELEITE</p>
+                        </div>
+                        
+                        <div class=" ruleta-imagen-background-2 container-ruleta-etiqueta-box-box">
+                            <img class="ruleta-imagen" src={% static 'index/img/ruleta/EL_SOMETIDO.jpg' %}>
+                            <p class="ruleta-etiqueta-texto">EL SOMETIDO</p>
+                        </div>
+            
+    
+                        <div class=" ruleta-imagen-background-3 container-ruleta-etiqueta-box-box">
+                            <img class="ruleta-imagen" src={% static 'index/img/ruleta/EL_SOMETIDOII.jpg' %}>
+                            <p class="ruleta-etiqueta-texto">EL SOMETIDO II</p>
+    
+                        </div>
+                        <div class="ruleta-imagen-background-2 container-ruleta-etiqueta-box-box">
+                            <img class="ruleta-imagen" src={% static 'index/img/ruleta/LA_DAMA.jpg' %}>
+                            <p class="ruleta-etiqueta-texto">LA DAMA</p>
+                        </div>
+                    </div>
+                
+    
+                    <div class="col-md-6 col-sm-12 ">
+
+                        <div class=" ruleta-imagen-background-1 container-ruleta-etiqueta-box-box">
+                            <img class="ruleta-imagen" src={% static 'index/img/ruleta/LA_DAMAII.jpg' %}>
+                            <p class="ruleta-etiqueta-texto">LA DAMA II</p>
+                        </div>
+    
+    
+                        <div class="ruleta-imagen-background-2 container-ruleta-etiqueta-box-box">
+                            <img class="ruleta-imagen" src={% static 'index/img/ruleta/LA_HAMACA.jpg' %}>
+                            <p class="ruleta-etiqueta-texto">LA HAMACA</p>
+                        </div>
+    
+    
+                        <div class="ruleta-imagen-background-3 container-ruleta-etiqueta-box-box">
+                            <img class="ruleta-imagen" src={% static 'index/img/ruleta/LA_MEDUSA.jpg' %}>
+                            <p class="ruleta-etiqueta-texto">LA MEDUSA</p>
+                        </div>
+    
+    
+                        <div class="ruleta-imagen-background-2 container-ruleta-etiqueta-box-box">
+                            <img class="ruleta-imagen" src={% static 'index/img/ruleta/LA_SORPRESA.jpg' %}>
+                            <p class="ruleta-etiqueta-texto">LA SORPRESA</p>
+                        </div>
+                    </div>
+                    
+                </div>
+    
+            </div>
+        </div>
+    </div>
+    <a href=""><img class="img-fluid9 mb-3" src={% static 'index/img/divina-men2.svg' %}></a>
+
+</div>
+
+<div>
+    <!--<button onclick="spinner.spin()">RND</button>-->
+
+
+
+
+<script>
+    
+var data = [
+//{ id: '', color: '#3f297e', text: 'ALL IN', ikon: 'invert_colors' },
+{ id: "", color: "#792042", text: "El Deleite" },
+{ id: "", color: "#3B0D3D", text: "La Sorpresa" },
+{ id: "", color: "#220A37", text: "La Hamaca" },
+{ id: "", color: "#792042", text: "El Sometido" },
+{ id: "", color: "#3B0D3D", text: "El Sometido II" },
+{ id: "", color: "#220A37", text: "La Dama" },
+{ id: "", color: "#792042", text: "La Dama II" },
+{ id: "", color: "#3B0D3D", text: "La Medusa"},
+{ id: "", color: "#220A37", text: "El Deleite" },
+{ id: "", color: "#792042", text: "La Sorpresa" },
+{ id: "", color: "#3B0D3D", text: "La Hamaca" },
+{ id: "", color: "#220A37", text: "El Sometido"},
+];
+
+var RouletteWheel = function (el, items) {
+this.$el = $(el);
+this.items = items || [];
+this._bis = false;
+this._angle = 0;
+this._index = 0;
+this.options = {
+angleOffset: -90
+};
+};
+
+_.extend(RouletteWheel.prototype, Backbone.Events);
+
+RouletteWheel.prototype.spin = function (_index) {
+var count = this.items.length;
+var delta = 360 / count;
+var index = !isNaN(parseInt(_index))
+? parseInt(_index)
+: parseInt(Math.random() * count);
+
+var a = index * delta + (this._bis ? 1440 : -1440);
+
+//a+=this.options.angleOffset;
+
+this._bis = !this._bis;
+this._angle = a;
+this._index = index;
+
+var $spinner = $(this.$el.find(".spinner"));
+
+var _onAnimationBegin = function () {
+this.$el.addClass("busy");
+this.trigger("spin:start", this);
+};
+
+var _onAnimationComplete = function () {
+this.$el.removeClass("busy");
+
+this.trigger("spin:end", this);
+
+};
+
+$spinner.velocity("stop").velocity(
+    
+{
+rotateZ: a + "deg"
+},
+{
+//easing: [20, 7],
+//easing: [200, 20],
+easing: "easeOutQuint",
+duration: 6000,
+begin: $.proxy(_onAnimationBegin, this),
+complete: $.proxy(_onAnimationComplete, this)
+
+}
+);
+};
+
+RouletteWheel.prototype.render = function () {
+var $spinner = $(this.$el.find(".spinner"));
+
+var D = this.$el.width();
+var R = D * 0.5;
+
+var count = this.items.length;
+var delta = 360 / count;
+
+for (var i = 0; i < count; i++) {
+var item = this.items[i];
+
+var color = item.color;
+var text = item.text;
+var ikon = item.ikon;
+
+var html = [];
+html.push('<div class="item" ');
+html.push('data-index="' + i + '" ');
+html.push('data-type="' + item.type + '" ');
+html.push(">");
+html.push('<span class="label">');
+if (ikon) html.push('<i class="material-icons">' + ikon + "</i>");
+html.push('<span class="text">' + text + "</span>");
+html.push("</span>");
+html.push("</div>");
+
+var $item = $(html.join(""));
+
+var borderTopWidth = D + D * 0.0025; //0.0025 extra :D
+var deltaInRadians = (delta * Math.PI) / 180;
+var borderRightWidth = D / (1 / Math.tan(deltaInRadians));
+
+var r = delta * (count - i) + this.options.angleOffset - delta * 0.5;
+
+$item.css({
+borderTopWidth: borderTopWidth,
+borderRightWidth: borderRightWidth,
+transform: "scale(2) rotate(" + r + "deg)",
+borderTopColor: color
+});
+
+var textHeight = parseInt(((2 * Math.PI * R) / count) * 0.5);
+
+$item.find(".label").css({
+transform: 'translateX('+ (textHeight) +'px) translateY('+  (-1 * R) +'px) rotateZ('+ (90 + delta*.5) +'deg)',
+transform:
+"translateY(" +
+D * -0.25 +
+"px) translateX(" +
+textHeight * 1.03 +
+"px) rotateZ(" +
+(90 + delta * 0.5) +
+"deg)",
+height: textHeight + "px",
+lineHeight: textHeight + "px",
+textIndent: R * 0.1 + "px"
+});
+
+$spinner.append($item);
+}
+
+$spinner.css({
+fontSize: parseInt(R * 0.06) + "px"
+});
+
+//this.renderMarker();
+};
+
+RouletteWheel.prototype.renderMarker = function () {
+var $markers = $(this.$el.find(".markers"));
+var D = this.$el.width();
+var R = D * 0.5;
+
+var count = this.items.length;
+var delta = 360 / count;
+
+var borderTopWidth = D + D * 0.0025; //0.0025 extra :D
+var deltaInRadians = (delta * Math.PI) / 180;
+var borderRightWidth = D / (1 / Math.tan(deltaInRadians));
+
+var i = 0;
+var $markerA = $('<div class="marker">');
+var $markerB = $('<div class="marker">');
+var $fichaA = $('<div class="ficha">');
+
+
+var rA = delta * (count - i - 1) - delta * 0.5 + this.options.angleOffset;
+var rB = delta * (count - i + 1) - delta * 0.5 + this.options.angleOffset;
+
+this.$el.addClass("fichado");
+
+$markerA.css({
+borderTopWidth: borderTopWidth,
+borderRightWidth: borderRightWidth,
+transform: "scale(2) rotate(" + rA + "deg)",
+borderTopColor: "#FFF"
+});
+$markerB.css({
+borderTopWidth: borderTopWidth,
+borderRightWidth: borderRightWidth,
+transform: "scale(2) rotate(" + rB + "deg)",
+borderTopColor: "#FFF"
+});
+$fichaA.css({
+    borderTopColor: "green"
+});
+
+$markers.append($markerA);
+$markers.append($markerB);
+$ficha.append($fichaA);
+};
+
+RouletteWheel.prototype.bindEvents = function () {
+this.$el.find(".button").on("click", $.proxy(this.spin, this));
+
+};
+
+var spinner;
+$(window).ready(function () {
+spinner = new RouletteWheel($(".roulette"), data);
+spinner.render();
+spinner.bindEvents();
+
+spinner.on("spin:start", function (r) {
+console.log("spin start!");
+});
+spinner.on("spin:end", function (r) {
+console.log("spin end! -->" + r._index);
+
+});
+});
+
+</script>
+
+
+{% else %}
+       
+{% endif %}
+
+
+    <nav class="navbar  bg-color20 pb-0 d-sm-none d-sm-block ">
+    
+    </nav>
+
+    <div class="container-fluid bg-color9 foo"  >
+        <div class="row perfil-ciudades-box ">
+            <div class="col-12  ">
+                <h6 class="perfil-ciudades-header">CIUDADES</h6>
+            </div>
+            <div class="col-auto">
+                <a href="{% url 'index' %}" class="btn btn-transparent-white">PUERTO MONTT</a>
+            </div>
+            <div class="col-auto">
+              <a href="{% url 'index' %}" class="btn btn-transparent-white">VALDIVIA</a>
+            </div>
+            <div class="col-auto">
+                <a href="{% url 'index' %}" class="btn btn-transparent-white">FUTRONO</a>
+            </div>
+            <div class="col-auto">
+              <a href="{% url 'index' %}" class="btn btn-transparent-white">RIO BUENO</a>
+            </div>
+            <div class="col-auto">
+                <a href="{% url 'index' %}" class="btn btn-transparent-white">OSORNO</a>
+            </div>
+            <div class="col-auto">
+              <a href="{% url 'index' %}" class="btn btn-transparent-white">PUCON</a>
+            </div>
+
+
+            <div class="col-auto">
+                <a href="{% url 'index' %}" class="btn btn-transparent-white">VILLARICA</a>
+            </div>
+            <div class="col-auto">
+              <a href="{% url 'index' %}" class="btn btn-transparent-white">TEMUCO</a>
+            </div>
+            <div class="col-auto">
+                <a  href="{% url 'index' %}" class="btn btn-transparent-white">LOS ANGELES</a>
+            </div>
+            <div class="col-auto">
+              <a href="{% url 'index' %}" class="btn btn-transparent-white">CHILLAN</a>
+            </div>
+            <div class="col-auto">
+                <a href="{% url 'index' %}" class="btn btn-transparent-white">CONCEPCION</a>
+            </div>
+            <div class="col-auto">
+                <a href="{% url 'index' %}" class="btn btn-transparent-white">TALCA</a>
+            </div>
+
+            <div class="col-auto">
+                <a href="{% url 'index' %}" class="btn btn-transparent-white">CURICO</a>
+            </div>
+            <div class="col-auto">
+                <a href="{% url 'index' %}" class="btn btn-transparent-white">RANCAGUA</a>
+            </div>
+    
+        </div>
+    </div>
+
+
+
+
+{% endblock content %}

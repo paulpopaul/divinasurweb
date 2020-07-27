@@ -1,0 +1,32 @@
+{% load i18n %}
+{% load zinnia %}
+{% load static %}
+        <a href="{{ object.get_absolute_url }}" title="{{ object.title }}" rel="bookmark" itemprop="url">
+            <div class="movie-card">
+                <img class="movie-header manOfSteel" src="{{ object.image.url }}" >
+                <div class="movie-content">
+                    <div class="movie-content-header">
+                        <a href="#">
+                            <h2 class="">
+                            <a class="movie-title" href="{{ object.get_absolute_url }}" title="{{ object.title }}" rel="bookmark" itemprop="url">{{ object.title|widont }}</a>
+                            <img class="imax-logo d-none d-sm-block  img--top manOfSteel" src={% static 'index/img/divinalogo0.svg' %}></h2>
+                            <img class="imax-logo2  divina-logo2 img--top manOfSteel" src={% static 'index/img/divina-men2.svg' %}>
+                        </a>
+                        <div class="movie-info">
+                            <div class="info-section">
+                                <label>Nacionalidad</label>
+                                <span>{{ object.nacionalidad }}</span>
+                            </div>
+                            <div class="info-section">
+                                <label>Edad</label>
+                                <span>{{ object.edad }}</span>
+                            </div>
+                            <div class="info-section">
+                                <label>Categoría</label>
+                                <span>{{ object.categoriass }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
